@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" >
+</head>
+<body>
+<header th:insert="~{/block/header :: header}"></header>
+<div class="container mt-5 mb-5">
+    <h1>Заповніть анкету</h1>
+    <form action="/catalog/add" method="post">
+        <input type="text" name="lastName" placeholder="Прізвище" class="form-control"><br>
+        <input type="text" name="firstName" placeholder="Ім'я" class="form-control"><br>
+        <input type="text" name="middleName" placeholder="По-батькові" class="form-control"></input><br>
+        <input type="date" id="birth" name="birth" placeholder="Рік народження" class="form-control"><br>
+        <select id="gender" name="gender" class="form-control">
+            <option value="">Виберіть стать</option>
+            <option value="Чоловіча">Чоловік</option>
+            <option value="Жіноча">Жінка</option>
+        </select><br>
+        <select id="occupation" name="occupation" class="form-control" onchange="checkCustomOccupation(this.value)">
+            <option value="">Рід занять</option>
+            <option value="Робота/професія">Робота/професія</option>
+            <option value="Навчання/освіта">Навчання/освіта</option>
+            <option value="Хобі/захоплення">Хобі/захоплення</option>
+            <option value="Спорт/фізична активність">Спорт/фізична активність</option>
+            <option value="Мистецтво/творчість">Мистецтво/творчість</option>
+            <option value="Волонтерство/соціальна діяльність">Волонтерство/соціальна діяльність</option>
+            <option value="Подорожі/екскурсії">Подорожі/екскурсії</option>
+            <option value="Читання/література">Читання/література</option>
+            <option value="Музика/інструментальна гра">Музика/інструментальна гра</option>
+            <option value="Гри/ігри">Гри/ігри</option>
+            <option value="Кулінарія/готування">Кулінарія/готування</option>
+            <option value="Саморозвиток/курси">Саморозвиток/курси</option>
+            <option value="Технології/програмування">Технології/програмування</option>
+            <option value="Танці/хореографія">Танці/хореографія</option>
+            <option value="Фотографія/відеозйомка">Фотографія/відеозйомка</option>
+            <option value="custom">Інше</option>
+        </select><br>
+        <input type="text" id="customOccupation" name="customOccupation" class="form-control" style="display: none;"><br>
+
+        <script>
+            function checkCustomOccupation(value) {
+                var customOccupationInput = document.getElementById('customOccupation');
+                if (value === 'custom') {
+                    customOccupationInput.style.display = 'block';
+                } else {
+                    customOccupationInput.style.display = 'none';
+                }
+            }
+        </script>
+        <button type="submit" class="btn btn-success">Зберегти</button>
+    </form>
+</div>
+</body>
+</html>

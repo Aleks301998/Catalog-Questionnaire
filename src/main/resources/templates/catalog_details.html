@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Getting Started: Serving Web Content</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
+</head>
+<body>
+<header th:insert="/block/header :: header"></header>
+<div class="container mt-5"></div>
+<div th:each="el : ${catalog}" class="alert alert-info mt-2">
+  <h3><strong>Анкета користувача:</strong> <span th:text="${' ' + el.lastName + ' ' + el.firstName}"></span></h3>
+  <p>Прізвище: <span th:text="${el.lastName}"></span></p>
+  <p>Ім'я: <span th:text="${el.firstName}"></span></p>
+  <p>По-батькові: <span th:text="${el.middleName}"></span></p>
+  <p>Рік народження: <span th:text="${el.birth}"></span></p>
+  <p>Стать: <span th:text="${el.gender}"></span></p>
+  <p>Рід занять:
+    <span th:if="${el.occupation == 'custom'}" th:text="${el.customOccupation}"></span>
+    <span th:if="${el.occupation != 'custom'}" th:text="${el.occupation}"></span>
+  </p>
+  <a th:href="'/catalog/' + ${el.id} + '/edit'" class="btn btn-warning">Редагувати</a><br><br>
+  <form th:action="'/catalog/' + ${el.id} + '/delete'" method="post">
+    <button class="btn btn-warning" type="submit">Видалити</button>
+  </form>
+</div>
+</body>
+</html>
